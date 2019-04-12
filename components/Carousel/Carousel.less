@@ -1,6 +1,6 @@
 .carousel {
   .width-100();
-  .flex(center, center);
+  // .flex(center, center);
   height: 500px;
   position: relative;
   overflow: hidden;
@@ -28,26 +28,36 @@
     top: 50%; 
     left: 25px;
     transform: translate(0, -50%);
+    z-index: 5;
   }
   .right-button {
     top: 50%; 
     right: 25px;
     transform: translate(0, -50%);
+    z-index: 5;
   }
   img {
     .width-100();
     display: none;
     transition: left 0.33s ease-in-out,
                 right 0.33s ease-in-out;
+    top: -100%;
+    position: relative;
+    right: 0;
+    left: 0;
 
     &.img--next {
       display: block;
+      left: unset;
       right: -100%;
+      top: -200%;
     }
 
     &.img--previous {
       display: block;
-      left: -100%
+      right: unset;
+      left: -100%;
+      top: 0;
     }
   }
 }
