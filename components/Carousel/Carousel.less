@@ -37,5 +37,17 @@
   img {
     .width-100();
     display: none;
+    transition: left 0.33s ease-in-out,
+                right 0.33s ease-in-out;
+
+    &.img--next {
+      display: block;
+      right: -100%;
+    }
+
+    &.img--previous {
+      display: block;
+      left: -100%
+    }
   }
 }

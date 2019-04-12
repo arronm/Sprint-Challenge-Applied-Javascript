@@ -304,4 +304,12 @@ body {
 .carousel img {
   width: 100%;
   display: none;
+  transition: left 0.33s ease-in-out, right 0.33s ease-in-out;
+}
+.carousel img.img--next {
+  display: block;
+  right: -100%;
+}
+.carousel img.img--previous {
+  left: -100%;
 }
