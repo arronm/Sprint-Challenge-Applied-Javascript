@@ -311,5 +311,6 @@ body {
   right: -100%;
 }
 .carousel img.img--previous {
+  display: block;
   left: -100%;
 }

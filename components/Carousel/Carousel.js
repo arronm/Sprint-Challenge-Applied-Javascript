@@ -8,6 +8,8 @@ class Carousel {
         this.numberOfImages = this.images.length;
         this.currentIndex = 1;
 
+        // TODO: Add nextImg and previousImg here? Refactor?
+
         this.left.addEventListener('click', () => this.previousSlide());
         this.right.addEventListener('click', () => this.nextSlide());
 
@@ -15,21 +17,19 @@ class Carousel {
     }
 
     previousSlide() {
+        // TODO: (FOR ANIMATION) Hide current +1, Show current -1, add classes img--next and img--previous
+
+        this.carousel.querySelector(`img[data-slide="${this.currentIndex}"]`).style.display = 'none';
+        this.currentIndex = (this.currentIndex + 1) > this.numberOfImages ? 1 : this.currentIndex + 1;
+        this.carousel.querySelector(`img[data-slide="${this.currentIndex}"]`).style.display = 'block';
 
     }
 
     nextSlide() {
-        
+        this.carousel.querySelector(`img[data-slide="${this.currentIndex}"]`).style.display = 'none';
+        this.currentIndex = (this.currentIndex - 1) < 1 ? this.numberOfImages : this.currentIndex - 1;
+        this.carousel.querySelector(`img[data-slide="${this.currentIndex}"]`).style.display = 'block';
     }
 }
 
-let carousel = document.querySelector();
-
-/* If You've gotten this far, you're on your own! Although we will give you some hints:
-    1. You will need to grab a reference to the carousel, and in it grab the laft and right buttons
-    2. You will need to grab a reference to all of the images
-    3. Create a current index
-    4. Those buttons are gonna need some click handlers.
-    5. Think of how you would animate this component. Make the cards slide in and out, or fade. It's up to you!
-    6. Have fun!
-*/
+let carousel = new Carousel({ carousel: document.querySelector('.carousel') });
