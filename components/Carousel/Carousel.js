@@ -27,6 +27,7 @@ class Carousel {
         this.currentIndex = this.getSlideIndex(this.currentIndex - 1);
 
         this.nextSlide.classList.remove('img--next');
+        this.nextSlide.removeAttribute('style');
         this.currentSlide.classList.add('img--next');
         this.nextSlide = this.currentSlide;
 
@@ -40,21 +41,21 @@ class Carousel {
     }
 
     nextSlideTrigger() {
-        // this.currentIndex = this.getSlideIndex(this.currentIndex + 1);
+        this.currentIndex = this.getSlideIndex(this.currentIndex + 1);
+        console.log(this.currentIndex);
 
-        // this.previousSlide.classList.remove('img--previous');
-        // this.currentSlide.classList.add('img--previous');
-        // this.carousel.appendChild(this.previousSlide);
-        // this.previousSlide = this.currentSlide;
+        this.previousSlide.classList.remove('img--previous');
+        this.previousSlide.removeAttribute('style');
+        this.currentSlide.classList.add('img--previous');
+        this.carousel.insertBefore(this.previousSlide, this.right);
+        this.previousSlide = this.currentSlide;
 
-        // this.nextSlide.classList.remove('img-next');
-
-        // this.nextSlide = this.images[this.getSlideIndex(this.currentIndex + 1) - 1];
-        // this.nextSlide.classList.add('img--next');
-
-        // this.nextSlide.classList.remove('img--next');
-        // this.currentSlide = this.nextSlide;
-        // this.currentSlide.style.display = 'block';
+        this.nextSlide.classList.remove('img--next');
+        this.nextSlide.style.display = 'block';
+        this.currentSlide = this.nextSlide;
+        
+        this.nextSlide = this.images[this.getSlideIndex(this.currentIndex + 1) - 1];
+        this.nextSlide.classList.add('img--next');
     }
 
     /**
