@@ -18,7 +18,7 @@ class TabLink {
     }
 
      // Map over the newly converted NodeList we just created in our if statement above. Convert each this.cards element into a new instance of the TabCard class. Pass in a card object to the TabCard class. 
-    this.cards = Array.from(this.cards).map(card => new TabCard(card));
+    this.cards = Array.from(this.cards).map((card) => new TabCard(card));
 
     // Add a click event that invokes this.selectTab
     this.tabElement.addEventListener('click', () => this.selectTab());
@@ -32,17 +32,21 @@ class TabLink {
     // Iterate through the NodeList removing the .active-tab class from each element
     // tabs.forEach()
 
+    // Note: there should only be a single tab active at one time, don't need to iterate over all tabs:
+    document.querySelector('.tabs .tab-active-tab').classList.remove('active-tab');
+
     // Select all of the elements with the .card class on them
-    // const cards = ;
+    // Note: Using card-hidden class to limit the number of cards we need to iterate over
+    const cards = document.querySelectorAll('.cards-container .card:not(.card--hidden)');
 
     // Iterate through the NodeList setting the display style each one to 'none'
-    // cards.forEach()
+    cards.forEach((card) => card.selectCard())
     
     // Add a class of ".active-tab" to this.tabElement
-    // this.tabElement;
+    this.tabElement.classList.add('active-tab');
   
     // Notice we are looping through the this.cards array and invoking selectCard() from the TabCard class. Just un-comment the code and study what is happening here.
-    // this.cards.forEach(card => card.selectCard());
+    this.cards.forEach(card => card.selectCard());
   }
 }
 
