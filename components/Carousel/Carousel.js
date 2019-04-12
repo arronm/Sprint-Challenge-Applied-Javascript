@@ -1,14 +1,73 @@
 class Carousel {
+    constructor(props) {
+        this.carousel = props.carousel;
+        this.left = this.carousel.querySelector('.left-button');
+        this.right = this.carousel.querySelector('.right-button');
 
+        this.images = Array.from(this.carousel.querySelectorAll('img'));
+        this.numberOfImages = this.images.length;
+        this.currentIndex = 1;
+        this.currentSlide = this.images[this.currentIndex - 1]
+        this.nextSlide = this.images[this.getSlideIndex(this.currentIndex + 1) - 1];
+        this.previousSlide = this.images[this.getSlideIndex(this.currentIndex - 1) -1];
+
+        this.left.addEventListener('click', () => this.previousSlideTrigger());
+        this.right.addEventListener('click', () => this.nextSlideTrigger());
+
+        // Immediately display our initial carousel image
+        this.currentSlide.style.display = 'block';
+
+        // Set up our previous and next images for animation
+        this.nextSlide.classList.add('img--next');
+        this.previousSlide.classList.add('img--previous');
+        this.carousel.insertBefore(this.previousSlide, this.currentSlide);
+    }
+
+    previousSlideTrigger() {
+        this.currentIndex = this.getSlideIndex(this.currentIndex - 1);
+
+        this.nextSlide.classList.remove('img--next');
+        this.nextSlide.removeAttribute('style');
+        this.currentSlide.classList.add('img--next');
+        this.nextSlide = this.currentSlide;
+
+        this.previousSlide.classList.remove('img--previous');
+        this.currentSlide = this.previousSlide;
+        this.currentSlide.style.display = 'block';
+
+        this.previousSlide = this.images[this.getSlideIndex(this.currentIndex - 1) - 1];
+        this.previousSlide.classList.add('img--previous');
+        this.carousel.insertBefore(this.previousSlide, this.currentSlide);
+    }
+
+    nextSlideTrigger() {
+        this.currentIndex = this.getSlideIndex(this.currentIndex + 1);
+        console.log(this.currentIndex);
+
+        this.previousSlide.classList.remove('img--previous');
+        this.previousSlide.removeAttribute('style');
+        this.currentSlide.classList.add('img--previous');
+        this.carousel.insertBefore(this.previousSlide, this.right);
+        this.previousSlide = this.currentSlide;
+
+        this.nextSlide.classList.remove('img--next');
+        this.nextSlide.style.display = 'block';
+        this.currentSlide = this.nextSlide;
+        
+        this.nextSlide = this.images[this.getSlideIndex(this.currentIndex + 1) - 1];
+        this.nextSlide.classList.add('img--next');
+    }
+
+    /**
+     * Handles math for changing our slide index, returns a number within our slide range
+     * @param {number} index - Expects a slide index number.
+     * @return {number}
+     */
+    getSlideIndex(index) {
+        if (index > this.numberOfImages) return 1;
+        if (index < 1) return this.numberOfImages;
+        return index;
+    }
 }
 
-let carousel = document.querySelector();
-
-/* If You've gotten this far, you're on your own! Although we will give you some hints:
-    1. You will need to grab a reference to the carousel, and in it grab the laft and right buttons
-    2. You will need to grab a reference to all of the images
-    3. Create a current index
-    4. Those buttons are gonna need some click handlers.
-    5. Think of how you would animate this compoennt. Make the cards slide in and out, or fade. It's up to you!
-    6. Have fun!
-*/
+let carousel = new Carousel({ carousel: document.querySelector('.carousel') });
