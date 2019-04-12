@@ -33,14 +33,14 @@ class TabLink {
     // tabs.forEach()
 
     // Note: there should only be a single tab active at one time, don't need to iterate over all tabs:
-    document.querySelector('.tabs .tab-active-tab').classList.remove('active-tab');
+    document.querySelector('.tabs .tab.active-tab').classList.remove('active-tab');
 
     // Select all of the elements with the .card class on them
     // Note: Using card-hidden class to limit the number of cards we need to iterate over
     const cards = document.querySelectorAll('.cards-container .card:not(.card--hidden)');
 
     // Iterate through the NodeList setting the display style each one to 'none'
-    cards.forEach((card) => card.selectCard())
+    cards.forEach((card) => card.classList.add('card--hidden'));
     
     // Add a class of ".active-tab" to this.tabElement
     this.tabElement.classList.add('active-tab');
